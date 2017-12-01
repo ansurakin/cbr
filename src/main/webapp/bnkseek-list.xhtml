@@ -7,49 +7,77 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="layout.xhtml">
-        <ui:define name="content">
+        <ui:define name="content"> 
+
             <h:form id="form">
-                <p:growl id="msgs" showDetail="true"/>
+                <p:growl id="msgs" showDetail="true"/> 
+
+                <p:panel id="serchPanel" header="Search Form" style="margin-bottom:10px;">
+                    <h:panelGrid columns="4" cellpadding="5">
+                        <h:outputLabel for="bikFilter" value="БИК: " />
+                        <p:inputText id="bikFilter" value="#{bnkseekList.filter.bik}" required="false" label="БИК: ">
+                        </p:inputText>
+
+                        <p:outputLabel for="typePznFilter" value="Тип (PZN): " />
+                        <h:selectOneMenu id="typePznFilter" value="#{bnkseekList.filter.typePzn}" style="width:125px">
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItems value="#{bnkseekList.pznList}" var="pzn" itemLabel="#{pzn.name}" itemValue="#{pzn.name}"  />
+                        </h:selectOneMenu>
+
+                        <h:outputLabel for="regionFilter" value="Регион: " />
+                        <p:inputText id="regionFilter" value="#{bnkseekList.filter.region}" required="false" label="Регион: ">
+                        </p:inputText>                        
+                    </h:panelGrid>
+                </p:panel>
+
+                <h:panelGrid columns="2">
+                    <p:commandButton 
+                        icon="ui-icon-search" 
+                        update="bnkseekTable" 
+                        value="Поиск"
+                        actionListener="#{bnkseekList.search()}" />
+                </h:panelGrid>
 
                 <!--resizableColumns="true"-->
                 <!--draggableColumns="true"-->
-                <p:dataTable id="bnkseekTable"                             
+                <p:dataTable id="bnkseekTable" var="bnkseek" value="#{bnkseekList.bnkseekList}" rowKey="#{bnkseek.VKEY}" 
+
                              rows="10"
+                             draggableColumns="true"
+                             paginator="true"                             
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15"
-                             var="bnkseek" value="#{bnkseekList.bnkseekList}" 
-                             editable="true" editMode="cell" widgetVar="cellBnkseek" >
-                    <f:facet name="header">
-                        Cell Editing with Click and RightClick
-                    </f:facet>
+                             rowsPerPageTemplate="5,10,15"                                                        
+                             editable="true"
+                             emptyMessage="Нет данных"
+                             style="font-size:12px; word-wrap: break-word; word-break: break-all;"
+                             >
 
-                    <p:ajax  event="cellEdit" 
-                             update=":form:msgs"
-                             immediate="true"
-                             listener="#{bnkseekList.onCellEdit}"
-                             process="@this" 
-                             />
+                    <p:ajax event="rowEdit" listener="#{bnkseekList.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{bnkseekList.onRowCancel}" update=":form:msgs" />
 
-                    <p:column headerText="VKEY">
+                    <p:column headerText="VKEY" sortBy="#{bnkseek.VKEY}" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{bnkseek.VKEY}" /></f:facet>
                             <f:facet name="input"><p:inputText id="modelInput" value="#{bnkseek.VKEY}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-
-                    <p:column headerText="REAL">
+                    <p:column headerText="REAL" sortBy="#{bnkseek.REAL}" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{bnkseek.REAL}" /></f:facet>
                             <f:facet name="input"><p:inputText value="#{bnkseek.REAL}" style="width:96%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="PZN">
+                    <p:column headerText="PZNNAME" sortBy="#{bnkseek.PZNNAME}" >                        
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{bnkseek.PZN}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{bnkseek.PZN}" style="width:96%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.PZNNAME}" /></f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{bnkseek.PZNNAME}" style="width:100%">
+                                    <f:selectItems value="#{bnkseekList.pznList}" var="pzn" itemLabel="#{pzn.name}" itemValue="#{pzn.name}" />
+                                </h:selectOneMenu>
+                            </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="UER">
+                    <p:column headerText="UERNAME" sortBy="#{bnkseek.UERNAME}" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{bnkseek.UERNAME}" /></f:facet>
                             <f:facet name="input">
@@ -58,6 +86,128 @@
                                 </h:selectOneMenu>
                             </f:facet>
                         </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="REGNAME" sortBy="#{bnkseek.REGNAME}" >                        
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.REGNAME}" /></f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{bnkseek.REGNAME}" style="width:100%">
+                                    <f:selectItems value="#{bnkseekList.regList}" var="reg" itemLabel="#{reg.name}" itemValue="#{reg.name}" />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="TNPNAME" sortBy="#{bnkseek.TNPNAME}" >                        
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.TNPNAME}" /></f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{bnkseek.TNPNAME}" style="width:100%">
+                                    <f:selectItems value="#{bnkseekList.tnpList}" var="tnp" itemLabel="#{tnp.fullname}" itemValue="#{tnp.fullname}" />
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="RGN" sortBy="#{bnkseek.RGN}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.RGN}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.RGN}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="IND" sortBy="#{bnkseek.IND}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.IND}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.IND}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="NNP" sortBy="#{bnkseek.NNP}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.NNP}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.NNP}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="ADR" sortBy="#{bnkseek.ADR}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.ADR}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.ADR}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="RKC" sortBy="#{bnkseek.RKC}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.RKC}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.RKC}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="NAMEP" sortBy="#{bnkseek.NAMEP}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.NAMEP}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.NAMEP}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="NEWNUM" sortBy="#{bnkseek.NEWNUM}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.NEWNUM}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.NEWNUM}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="TELEF" sortBy="#{bnkseek.TELEF}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.TELEF}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.TELEF}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="OKPO" sortBy="#{bnkseek.OKPO}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.OKPO}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.OKPO}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="DT_IZM" sortBy="#{bnkseek.DT_IZM}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{bnkseek.DT_IZM}" >
+                                    <f:convertDateTime type="date" pattern="yyyy-MM-dd" timeZone="Europe/Moscow" />
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input"><p:calendar id="DT_IZM" value="#{bnkseek.DT_IZM}" locale="ru" navigator="true" pattern="yyyy-MM-dd" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="KSNP" sortBy="#{bnkseek.KSNP}">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{bnkseek.KSNP}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{bnkseek.KSNP}" style="width:96%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="DATE_IN" sortBy="#{bnkseek.DATE_IN}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{bnkseek.DATE_IN}" >
+                                    <f:convertDateTime type="date" pattern="yyyy-MM-dd" timeZone="Europe/Moscow" />
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input"><p:calendar id="DATE_IN" value="#{bnkseek.DATE_IN}" locale="ru" navigator="true" pattern="yyyy-MM-dd" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="DATE_CH" sortBy="#{bnkseek.DATE_CH}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{bnkseek.DATE_CH}" >
+                                    <f:convertDateTime type="date" pattern="yyyy-MM-dd" timeZone="Europe/Moscow" />
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input"><p:calendar id="DATE_CH" value="#{bnkseek.DATE_CH}" locale="ru" navigator="true" pattern="yyyy-MM-dd" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton icon="ui-icon-trash"
+                                         title="Delete"
+                                         actionListener="#{bnkseekList.delete(bnkseek)}"
+                                         update="bnkseekTable :form:msgs"
+                                         />
                     </p:column>
 
                 </p:dataTable>

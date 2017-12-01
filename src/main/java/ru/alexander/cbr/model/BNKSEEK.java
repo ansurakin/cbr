@@ -1,5 +1,6 @@
 package ru.alexander.cbr.model;
 
+import java.util.Date;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -55,16 +56,22 @@ public class BNKSEEK {
     @Length(max = 8, message = "The field must be less than {max} characters")
     private String OKPO;
 
-    private String DT_IZM;
+    private Date DT_IZM;
 
     @Length(max = 20, message = "The field must be less than {max} characters")
     private String KSNP;
 
-    private String DATE_IN;
+    private Date DATE_IN;
 
-    private String DATE_CH;
+    private Date DATE_CH;
     
+    
+    private String PZNNAME;
+    
+    private String TNPNAME;
     
     private String UERNAME;
+    
+    private String REGNAME;
 
 }

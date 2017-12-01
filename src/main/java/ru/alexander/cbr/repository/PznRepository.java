@@ -7,18 +7,18 @@ package ru.alexander.cbr.repository;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Select;
-import ru.alexander.cbr.model.UER;
+import ru.alexander.cbr.model.Pzn;
 
 /**
  *
  * @author Alex
  */
-public interface UERRepository {
+public interface PznRepository {
     
-    @Select("SELECT * FROM UER")
-    public List<UER> findAll();
+    @Select("SELECT * FROM pzn")
+    public List<Pzn> findAll();
 
-    @Select("SELECT * FROM UER WHERE UERNAME = #{uername}")
-    public UER findByUERNAME(String uername);
+    @Select("SELECT * FROM pzn WHERE name = #{name}")
+    public Pzn findByName(String name);
     
 }

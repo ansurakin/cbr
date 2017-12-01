@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+        <h:form id="bnkseekForm">
+            
+            <h:commandButton value="Save" action="#{bnkseekController.save}" />
+            
+            <p:panel header="Details">
+                <h:panelGrid columns="4" cellpadding="5">
+                    
+                    <p:outputLabel for="VKEY" value="VKEY: "  style="width: 120px; vertical-align:middle;" />
+                    <p:inputText id="VKEY" value="#{bnkseekController.bnkseek.VKEY}" />
+                    
+                    <p:outputLabel for="REAL" value="REAL: " />
+                    <p:inputText id="REAL" value="#{bnkseekController.bnkseek.REAL}" />
+                    
+                    <p:outputLabel for="PZN" value="PZN: " />
+                    <p:inputText id="PZN" value="#{bnkseekController.bnkseek.PZN}" />
+                    
+                    <p:outputLabel for="UER" value="UER: " />
+                    <p:inputText id="UER" value="#{bnkseekController.bnkseek.UER}" />
+                    
+                    <p:outputLabel for="RGN" value="RGN: " />
+                    <p:inputText id="RGN" value="#{bnkseekController.bnkseek.RGN}" />
+                    
+                    <p:outputLabel for="IND" value="IND: " />
+                    <p:inputText id="IND" value="#{bnkseekController.bnkseek.IND}" />
+                    
+                    <p:outputLabel for="TNP" value="TNP: " />
+                    <p:inputText id="TNP" value="#{bnkseekController.bnkseek.TNP}" />
+                    
+                    <p:outputLabel for="NNP" value="NNP: " />
+                    <p:inputText id="NNP" value="#{bnkseekController.bnkseek.NNP}" />
+                    
+                    <p:outputLabel for="ADR" value="ADR: " />
+                    <p:inputText id="ADR" value="#{bnkseekController.bnkseek.ADR}" />
+                    
+                    <p:outputLabel for="RKC" value="RKC: " />
+                    <p:inputText id="RKC" value="#{bnkseekController.bnkseek.RKC}" />
+                    
+                    <p:outputLabel for="NAMEP" value="NAMEP: " />
+                    <p:inputText id="NAMEP" value="#{bnkseekController.bnkseek.NAMEP}" />
+                    
+                    <p:outputLabel for="NEWNUM" value="NEWNUM: " />
+                    <p:inputText id="NEWNUM" value="#{bnkseekController.bnkseek.NEWNUM}" />
+                    
+                    <p:outputLabel for="TELEF" value="TELEF: " />
+                    <p:inputText id="TELEF" value="#{bnkseekController.bnkseek.TELEF}" />
+                    
+                    <p:outputLabel for="REGN" value="REGN: " />
+                    <p:inputText id="REGN" value="#{bnkseekController.bnkseek.REGN}" />
+                                                            
+                    <p:outputLabel for="OKPO" value="OKPO: " />
+                    <p:inputText id="OKPO" value="#{bnkseekController.bnkseek.OKPO}" />
+                    
+                    <p:outputLabel for="DT_IZM" value="DT_IZM: " />
+                    <p:inputText id="DT_IZM" value="#{bnkseekController.bnkseek.DT_IZM}" />
+                    
+                    <p:outputLabel for="KSNP" value="KSNP: " />
+                    <p:inputText id="KSNP" value="#{bnkseekController.bnkseek.KSNP}" />
+                    
+                    <p:outputLabel for="DATE_IN" value="DATE_IN: " />
+                    <p:inputText id="DATE_IN" value="#{bnkseekController.bnkseek.DATE_IN}" />
+                    
+                    <p:outputLabel for="DATE_CH" value="DATE_CH: " />
+                    <p:inputText id="DATE_CH" value="#{bnkseekController.bnkseek.DATE_CH}" />
+                    
+                </h:panelGrid>
+            </p:panel>
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

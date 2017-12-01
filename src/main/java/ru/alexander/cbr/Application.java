@@ -20,9 +20,6 @@ import ru.alexander.cbr.repository.BNKSEEKRepository;
 @ComponentScan({"ru.alexander.cbr"})
 @MapperScan("ru.alexander.cbr.repository")
 public class Application implements CommandLineRunner{
-    
-    @Autowired
-    private BNKSEEKRepository bNKSEEKRepository;
 
     public static void main(String[] args) {        
         SpringApplication.run(Application.class, args);
@@ -30,8 +27,7 @@ public class Application implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Приложение стартовало");
-//        System.out.println("111111111111" + this.bNKSEEKRepository.findAll().toString());
+//        System.out.println("Приложение стартовало");
     }
     
     @Bean
