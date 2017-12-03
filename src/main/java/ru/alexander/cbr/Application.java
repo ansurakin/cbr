@@ -46,6 +46,6 @@ public class Application implements CommandLineRunner{
                 DispatcherType.ASYNC, DispatcherType.ERROR));
         rwFilter.addUrlPatterns("/*");
         return rwFilter;
-    }
+    }    
     
 }
