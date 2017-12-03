@@ -1,0 +1,6 @@
+CREATE TABLE user (  
+ id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,  
+ name VARCHAR(30),  
+ email VARCHAR(128)  
+ );  
+
