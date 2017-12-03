@@ -34,8 +34,8 @@ public interface BNKSEEKRepository {
             + "VALUES\n"
             + "(#{VKEY},#{REAL},#{PZN},#{UER},#{RGN},#{IND},#{TNP},#{NNP},#{ADR},#{RKC},#{NAMEP},#{NEWNUM},#{TELEF},#{REGN},#{OKPO},#{DT_IZM},#{KSNP},#{DATE_IN},#{DATE_CH})"
     )
-    public void insert(BNKSEEK bnkseek);
-
+    public void insert(BNKSEEK bnkseek);    
+    
     @Update("UPDATE BNKSEEK\n"
             + "SET \n"
             + " REAL = #{REAL},\n"
@@ -81,5 +81,8 @@ public interface BNKSEEKRepository {
             + "AND (CASE WHEN #{typePzn} IS NULL OR LENGTH(#{typePzn}) = 0 THEN TRUE ELSE p.name = #{typePzn} END)\n"
             + "ORDER BY b.VKEY")
     public List<BNKSEEK> findByFilter(BnkseekFilter filter);
+
+    @Delete("TRUNCATE BNKSEEK")
+    public void truncate();
 
 }

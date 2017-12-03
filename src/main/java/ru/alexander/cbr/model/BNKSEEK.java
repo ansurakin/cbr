@@ -10,8 +10,8 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 public class BNKSEEK {
-    
-    @Length(max = 8, message = "The field must be less than {max} characters")
+
+//    @Length(max = 8, message = "The field must be less than {max} characters")
     private String VKEY;
 
     @Length(max = 4, message = "The field must be less than {max} characters")
@@ -64,14 +64,13 @@ public class BNKSEEK {
     private Date DATE_IN;
 
     private Date DATE_CH;
-    
-    
+
     private String PZNNAME;
-    
+
     private String TNPNAME;
-    
+
     private String UERNAME;
-    
+
     private String REGNAME;
 
 }

@@ -3,6 +3,7 @@ package ru.alexander.cbr;
 import java.util.EnumSet;
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.ocpsoft.rewrite.servlet.RewriteFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import ru.alexander.cbr.repository.BNKSEEKRepository;
 
+@Slf4j
 //@SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan({"ru.alexander.cbr"})
@@ -28,6 +30,7 @@ public class Application implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
 //        System.out.println("Приложение стартовало");
+//        log.debug("Приложение стартовало");
     }
     
     @Bean

@@ -37,9 +37,7 @@
                         value="Поиск"
                         actionListener="#{bnkseekList.search()}" />
                 </h:panelGrid>
-
-                <!--resizableColumns="true"-->
-                <!--draggableColumns="true"-->
+                
                 <p:dataTable id="bnkseekTable" var="bnkseek" value="#{bnkseekList.bnkseekList}" rowKey="#{bnkseek.VKEY}" 
 
                              rows="10"
